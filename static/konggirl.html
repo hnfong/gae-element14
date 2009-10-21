@@ -1,0 +1,85 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+<script>
+var kg_sub = new Object();
+
+var kg__chi = '我好靚的點算都講黎你咁今味呀喂知唔';
+var kg__kgl = '禾巧令滴典扇刀趕尼梨拱金美牙畏g5';
+for (var i = 0 ; i < kg__chi.length; i++) kg_sub[kg__chi[i]] = kg__kgl[i];
+
+kg_sub['乜'] = 'mud';
+kg_sub['嗎'] = 'MA';
+kg_sub['啦'] = 'LA';
+kg_sub['既'] = 'GE'; // FIXME
+kg_sub['呢'] = 'LE';
+kg_sub['唉'] = '唉=[*';
+kg_sub['！'] = '!!';
+
+var kg_chars = '┼°*☆＊|×[!●*,-。×╳♥╭﹍☆︾﹀＊＃※︽︿﹒．╴︳︱｜–【】…℃℉￡￥≦≧〒αβ∞±√÷≠㎡♂∵☆㊣⊕○◇□△▲◤◥♀∴★⊙◎●◆■▽▼◣◢“”╮↗↖';
+
+var kg_post_decoration = new Array();
+
+kg_post_decoration.push("-3-'");
+kg_post_decoration.push("***");
+kg_post_decoration.push('=3=');
+kg_post_decoration.push('=口=');
+kg_post_decoration.push('>v<');
+kg_post_decoration.push('T^T');
+kg_post_decoration.push('>w<');
+kg_post_decoration.push('><""');
+kg_post_decoration.push('<333');
+
+function kg_filter_dumb_substitute(s) {
+	var ret = [];
+	for (var i = 0 ; i < s.length; i++) {
+		var c = s.substring(i, i+1);
+		if (kg_sub[c] != undefined) ret.push(kg_sub[c]);
+		else ret.push(c);
+	}
+
+	return ret.join("");
+}
+
+function kg_filter_slow_substitute(s) {
+	s = s.replace(/o既/g, 'ge');
+	s = s.replace(/而家/g, 'e+');
+	s = s.replace(/唔知/g, ' ng g ');
+	s = s.replace(/開心/g, '開針');
+	s = s.replace(/因為/g, '煙畏');
+	s = s.replace(/呢個/g, 'LEE個');
+	s = s.replace(/呢樣/g, 'LEE樣');
+	s = s.replace(/happy/g, 'HAPI');
+	s = s.replace(/comment/g, 'cm');
+	s = s.replace(/xanga/g, 'xg');
+	return s;
+}
+
+function kg_filter_add_random_decoration(s) {
+	s = s + kg_post_decoration[parseInt(Math.random() * 7)] + ' ';
+	if (Math.random() > 0.9) s = kg_filter_add_random_decoration(s);
+	return s;
+}
+
+function kg_filter_kg_chars() {
+	var k = Math.random() * 3;
+	var l = kg_chars.length;
+	var s = '';
+	for (var i = 0 ; i < k; i++) {
+		var r = parseInt(Math.random() * l);
+		s = s + kg_chars.substring(r, r + 1);
+	}
+	return s;
+}
+
+function kg_filter(s) {
+	s = kg_filter_slow_substitute(s);
+	s = kg_filter_dumb_substitute(s);
+	s = '　' + s + (Math.random() > 0.7?'""':(Math.random() > 0.5?'~*':'')) + '　';
+	if (Math.random() > 0.3) s = kg_filter_add_random_decoration(s);
+	s = kg_filter_kg_chars() + s + kg_filter_kg_chars();
+	return s;
+}
+
+</script>
+<div id="text"></div>
+<input id="input" type="text" value="你好嗎"><input type="button" value="支持港女文化！" onclick="document.getElementById('text').innerHTML = kg_filter(document.getElementById('input').value);">
