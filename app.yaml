@@ -4,6 +4,14 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /note/.*
+  script: note.py
+- url: /filestor/.*
+  script: filestor.py
+- url: /crud/.*
+  script: crud.py
+- url: /util/.*
+  script: util.py
 - url: /
   script: index.py
 - url: /

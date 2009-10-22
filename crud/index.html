@@ -1,0 +1,12 @@
+{% comment %}/* vim:set shiftwidth=1 tabstop=1 expandtab syntax=htmldjango: */{% endcomment %}
+{% extends "base.html" %}
+{% block main_body %}
+ {% if user %}
+ You are logged in as {{ user }}. <a href="{{ logout_url }}">Logout</a>
+ {% else %}
+ <a href="{{ login_url }}">Login</a>
+ {% endif %} | <a href="./create">Create New</a>
+ {% for item in clz.all %}
+  <div>{{ item.title }} - {{ item.key }} <form style="display: inline" method="post" action="delete"><input type="hidden" name="crud_key" value="{{ item.key }}"><input type="submit" value="delete"></form></div>
+ {% endfor %}
+{% endblock %}
